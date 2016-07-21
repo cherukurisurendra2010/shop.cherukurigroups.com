@@ -4,6 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+echo $msg;
 ?>
 <form name="login" id="login" method="post">
     Username: <input type="text" name="username" id="username"/>

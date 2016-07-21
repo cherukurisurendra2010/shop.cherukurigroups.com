@@ -18,21 +18,23 @@ class User extends CI_Controller{
             if(isset ($_SESSION['user'])){
                 redirect('user/profile');
             }
+            $data = array('msg'=>'','status'=>'');
             if($this->input->post('username')){
                 $this->load->model('users');
                 $data = array();
                 $data['username']= $this->input->post('username');
                 $data['password']= $this->input->post('password');
-                $result = $this->users->Authenticate($data );            
+                $result = $this->users->Authenticate($data);
                 if($result){
-                    print_r($result);
-                    session_start();
+                    @session_start();
                     $_SESSION['user'] = $result;
                     redirect('user/profile');
+                }  else {
+                    $data = array('msg'=>'Invalid Username and Password','status'=>'');
                 }
             }
 
-            $this->load->view('user/signin');
+            $this->load->view('user/signin',$data);
         }  catch (Exception $ex){
             echo 'error';
         }
